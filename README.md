@@ -1,5 +1,10 @@
 官网地址：https://cn.vitejs.dev/
 
+Vite是一个开发构建工具，开发过程中它历用浏览器native ES Module特性按需导入源码，预打包依赖。是为开发者量身定做的一套先进的开发工具，开发体验丝滑，默认还整合vue3，其特点是：
+
+- 启动快
+- 更新快
+
 # 搭建项目
 
 ```shell
@@ -13,6 +18,43 @@ $ yarn create @vitejs/app vue-ts-proj --template vue-ts
 ```
 
 # Vite 配置项
+
+Vite配置为放置在根目录中的“vite.config.js”文件。
+
+## 1. 取别名
+
+```js
+import { defineConfig } from "vite";
+import { resolve } from "path";
+import vue from "@vitejs/plugin-vue";
+
+export default defineConfig({
+  // 路径解析
+  resolve: {
+    alias: {
+      "@": resolve("./src"),
+      comps: resolve("./src/components"),
+    },
+  },
+  plugins: [vue()],
+});
+
+```
+
+## 2. 配置代理
+
+```js
+// 配置代理
+server: {
+  proxy: {
+    "/api": {
+      target: "http://jsonplaceholder.typicode.com",
+      changeOrigin: true,
+      rewrite: (path) => path.replace(/^\/api/, ""),
+    },
+  },
+},
+```
 
 
 
@@ -208,7 +250,36 @@ window.onresize = function () {
 import "./utils/rem"
 ```
 
-##　4. 环境变量
+## 5. 样式
+
+### Less Or Sass
+
+直接安装less/sass即可使用，无需任何配置。
+
+```shell
+$ yarn add less -D
+$ yarn add sass -D
+```
+
+### PostCSS
+
+**1/  autoprefixer**
+
+首先安装依赖：
+
+```shell
+$ yarn add autoprefixer -D
+```
+
+在根目录创建“postcss.config.js”文件，然后输入如下：
+
+```js
+module.exports = {
+  plugins: [require("autoprefixer")],
+};
+```
+
+##　6. 环境变量
 
 在根目录新建 ”.env.dev“、”.env.production“、”.env.test“文件
 
@@ -233,7 +304,7 @@ VITE_APP_ENV=production
 VITE_APP_HOST=测试环境服务器地址
 ```
 
-##　5. 全局ts类型声明
+##　7. 全局ts类型声明
 
 在根目录创建typings/index.d.ts文件
 
@@ -262,7 +333,7 @@ declare global {
 }
 ```
 
-## 6. axios
+## 8. axios
 
 安装相关依赖：
 
@@ -329,5 +400,55 @@ service.interceptors.response.use(
 );
 
 export default service;
+```
+
+## 9. mock
+
+安装依赖：
+
+```shell
+$ yarn add mockjs -S
+$ yarn add vite-plugin-mock -D
+```
+
+引入插件 vit.config.js：
+
+```js
+import { viteMockServe } from 'vite-plugin-mock';
+export default defineConfig({
+  plugins: [
+    viteMockServe({})
+  ],
+});
+```
+
+新建mock/test.ts文件
+
+```js
+export default [
+  {
+    url: "/api-dev/users",
+    method: "get",
+    response: (req) => {
+      return {
+        code: 0,
+        data: {
+          name: "Li-HONGYAO",
+          phone: "17398888669",
+        },
+      };
+    },
+  },
+];
+```
+
+模拟请求
+
+```
+fetch("/api-dev/users")
+  .then((res) => res.json())
+  .then((users) => {
+    console.log(users);
+  });
 ```
 
