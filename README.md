@@ -1,11 +1,25 @@
 官网地址：https://cn.vitejs.dev/
 
-Vite是一个开发构建工具，开发过程中它历用浏览器native ES Module特性按需导入源码，预打包依赖。是为开发者量身定做的一套先进的开发工具，开发体验丝滑，默认还整合vue3，其特点是：
+# 一、前言
+
+Vite  是一种新型前端构建工具，能够显著提升前端开发体验。它主要由两部分组成：
+
+- 一个开发服务器，基于原生ES模块提供了丰富的内建功能，如模块热更新（HMR）；
+- 一套构建指令，使用 Rollup 打包你的代码，并且它是预配置的，可以输出用于生产环境的优化过的静态资源。
+
+其特点就是：
 
 - 启动快
 - 更新快
 
-# 搭建项目
+**浏览器支持**
+
+1. 开发环境中：Vite 需要在支持 [原生 ES 模块动态导入](https://caniuse.com/es6-module-dynamic-import) 的浏览器中使用。
+2. 生产环境中：默认支持的浏览器需要支持 [通过脚本标签来引入原生 ES 模块](https://caniuse.com/es6-module) 。可以通过官方插件 [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) 支持旧浏览器。
+
+# 二、搭建项目
+
+[参考这里 >>](https://cn.vitejs.dev/guide/#scaffolding-your-first-vite-project)
 
 ```shell
 $ yarn create @vitejs/app
@@ -17,7 +31,7 @@ $ yarn create @vitejs/app
 $ yarn create @vitejs/app vue-ts-proj --template vue-ts
 ```
 
-# Vite 配置项
+# 三、Vite 配置项
 
 Vite配置为放置在根目录中的“vite.config.js”文件。
 
@@ -58,7 +72,7 @@ server: {
 
 
 
-#　移动端项目配置
+#　四、移动端项目配置
 
 ## 1. 配置路由
 
