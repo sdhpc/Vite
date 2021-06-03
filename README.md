@@ -466,3 +466,23 @@ fetch("/api-dev/users")
   });
 ```
 
+# 五、部署
+
+## 1. 二级目录配置
+
+打包时设置 `-base` 选项：
+
+```js
+"build": "vue-tsc --noEmit && vite build --mode production --base=/ddou/",
+```
+
+然后再 `router/index.ts` 中配置如下：
+
+```js
+const router = createRouter({
+  // 部署二级目录：createWebHistory(base?: string)
+  history: createWebHistory(/二级目录名/),
+  routes,
+});
+```
+
