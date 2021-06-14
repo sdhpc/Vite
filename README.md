@@ -5,7 +5,7 @@ Vite是一个开发构建工具，开发过程中它历用浏览器native ES Mod
 - 启动快
 - 更新快
 
-# 搭建项目
+# 一、搭建项目
 
 ```shell
 $ yarn create @vitejs/app
@@ -17,7 +17,7 @@ $ yarn create @vitejs/app
 $ yarn create @vitejs/app vue-ts-proj --template vue-ts
 ```
 
-# Vite 配置项
+# 二、Vite 配置项
 
 Vite配置为放置在根目录中的“vite.config.js”文件。
 
@@ -58,7 +58,7 @@ server: {
 
 
 
-#　移动端项目配置
+#　三、移动端项目配置
 
 ## 1. 配置路由
 
@@ -200,7 +200,7 @@ app.mount("#app");
 $ yarn add postcss-pxtorem autoprefixer -D
 ```
 
-在根目录下创建postcss.config.js
+在根目录下创建 postcss.config.js 文件：
 
 ```js
 module.exports = {
@@ -223,7 +223,7 @@ module.exports = {
 };
 ```
 
-在根目录src中新建util目录下新建rem.ts等比适配文件
+在根目录src中新建utils目录下新建rem.ts等比适配文件
 
 ```ts
 // rem等比适配配置文件
