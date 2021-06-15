@@ -7,12 +7,12 @@ Vite  是一种新型前端构建工具，能够显著提升前端开发体验�
 - 一个开发服务器，基于原生ES模块提供了丰富的内建功能，如模块热更新（HMR）；
 - 一套构建指令，使用 Rollup 打包你的代码，并且它是预配置的，可以输出用于生产环境的优化过的静态资源。
 
-其特点就是：
+**其特点就是：**
 
 - 启动快
 - 更新快
 
-**浏览器支持**
+**浏览器支持：**
 
 1. 开发环境中：Vite 需要在支持 [原生 ES 模块动态导入](https://caniuse.com/es6-module-dynamic-import) 的浏览器中使用。
 2. 生产环境中：默认支持的浏览器需要支持 [通过脚本标签来引入原生 ES 模块](https://caniuse.com/es6-module) 。可以通过官方插件 [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) 支持旧浏览器。
@@ -32,7 +32,6 @@ $ yarn create @vitejs/app vue-ts-proj --template vue-ts
 ```
 
 # 三、Vite 配置项
-
 Vite配置为放置在根目录中的 *vite.config.js* 文件。
 
 ## 1. 取别名
@@ -75,7 +74,6 @@ server: {
 
 
 #　四、移动端项目配置
-
 ## 1. 配置路由
 
 安装依赖：
@@ -216,7 +214,7 @@ app.mount("#app");
 $ yarn add postcss-pxtorem autoprefixer -D
 ```
 
-在根目录下创建postcss.config.js
+在根目录下创建 postcss.config.js 文件：
 
 ```js
 module.exports = {
@@ -239,7 +237,7 @@ module.exports = {
 };
 ```
 
-在根目录src中新建util目录下新建rem.ts等比适配文件
+在根目录src中新建utils目录下新建rem.ts等比适配文件
 
 ```ts
 // rem等比适配配置文件
