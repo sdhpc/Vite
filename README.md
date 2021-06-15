@@ -33,7 +33,7 @@ $ yarn create @vitejs/app vue-ts-proj --template vue-ts
 
 # 三、Vite 配置项
 
-Vite配置为放置在根目录中的“vite.config.js”文件。
+Vite配置为放置在根目录中的 *vite.config.js* 文件。
 
 ## 1. 取别名
 
@@ -44,12 +44,14 @@ import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   // 路径解析
-  resolve: {
+   resolve: {
     alias: {
-      "@": resolve("./src"),
-      comps: resolve("./src/components"),
+      "@": resolve(__dirname, "src"),
+      "comps": resolve(__dirname, "src/components"),
+      "pages": resolve(__dirname, "src/pages"),
+      "utils": resolve(__dirname, "src/utils"),
     },
-  },
+  }
   plugins: [vue()],
 });
 
@@ -79,7 +81,7 @@ server: {
 安装依赖：
 
 ```shell
-$ yarn add vue-router@4
+$ yarn add vue-router@next
 ```
 
 在src下新建router目录，新建index.ts文件
