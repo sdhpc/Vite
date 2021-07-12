@@ -470,6 +470,8 @@ fetch("/api-dev/users")
 
 ## 1. 二级目录配置
 
+**方案1：**
+
 打包时设置 `-base` 选项：
 
 ```js
@@ -481,7 +483,25 @@ fetch("/api-dev/users")
 ```js
 const router = createRouter({
   // 部署二级目录：createWebHistory(base?: string)
-  history: createWebHistory(/二级目录名/),
+  history: createWebHistory("/二级目录名/"),
+  routes,
+});
+```
+
+**方案2：**
+
+在 `vite.config.js` 配置项中添加 `base` 配置，如：
+
+```js
+base:"/YOUR_PROJECT_NAME/"
+```
+
+然后再 `router/index.ts` 中配置如下：
+
+```js
+const router = createRouter({
+  // 部署二级目录：createWebHistory(base?: string)
+  history: createWebHistory("/二级目录名/"),
   routes,
 });
 ```
