@@ -466,6 +466,44 @@ fetch("/api-dev/users")
   });
 ```
 
+## 10. 动态引入静态资源
+
+之前动态引入静态资源可以使用 `require` 形式，但是在vite中不可取，我们可以通过 [import.meta.url](https://cn.vitejs.dev/guide/assets.html#new-url-url-import-meta-url) 的形式引入，是一个 ESM 的原生功能，会暴露当前模块的 URL。将它与原生的 [URL 构造器](https://developer.mozilla.org/en-US/docs/Web/API/URL) 组合使用，在一个 JavaScript 模块中，通过相对路径我们就能得到一个被完整解析的静态资源 URL：
+
+```js
+setup() {
+    return {
+   	 	imgSrc: new URL('./img.png', import.meta.url)
+    }
+}
+```
+
+```html
+<img :src="imgSrc" />
+```
+
+值得注意的是，在生产环境中会抛出 “*URL is not defined xxx*”  的错误，这个时我们需要使用一个插件：[rollup-plugin-import-meta-url-to-module](https://www.npmjs.com/package/rollup-plugin-import-meta-url-to-module)。
+
+使用方式比较简单，首先安装依赖：
+
+```shell
+$ yarn add rollup-plugin-import-meta-url-to-module
+```
+
+然后再 “*vit.config.js*” 中配置plugins：
+
+```js
+import urlToModule from 'rollup-plugin-import-meta-url-to-module';
+
+export default {
+  plugins: [
+    urlToModule()
+  ]
+};
+```
+
+
+
 # 五、部署
 
 ## 1. 二级目录配置
