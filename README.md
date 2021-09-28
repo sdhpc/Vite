@@ -613,14 +613,45 @@ $ yarn add vuex@next
 配置：在src下创建store目录，并在store下创建index.ts
 
 ```ts
-import { createStore } from 'vuex'
+import { InjectionKey } from "vue";
+import { createStore, ActionTree, GetterTree, MutationTree, Store } from "vuex";
 
-export default createStore({
-  state: {},
-  mutations:{},
-  actions: {},
-  modules: {}
-})
+// 1. 声明Store类型
+declare interface StoreProps {
+  authUrlForIos?: string;
+}
+// 2. 定义注入类型
+export const globalStoreKey: InjectionKey<Store<StoreProps>> = Symbol();
+
+// 3. ---- state
+const state: StoreProps = {
+  authUrlForIos: "",
+};
+// 3. ---- getters
+const getters: GetterTree<StoreProps, any> = {
+  authUrlForIos: (state) => state.authUrlForIos,
+};
+// 3. ---- mutations
+const mutations: MutationTree<StoreProps> = {
+  updateAuthUrlForIos(state, payload) {
+    state.authUrlForIos = payload;
+  },
+};
+// 3. ---- actions
+const actions: ActionTree<StoreProps, any> = {
+  updateAuthUrlForIos({ commit }, payload) {
+    commit("updateAuthUrlForIos", payload);
+  },
+};
+
+// 4. 创建导出
+export default createStore<StoreProps>({
+  state,
+  getters,
+  mutations,
+  actions,
+});
+
 ```
 
 挂载：在main.ts挂载数据中心
@@ -628,13 +659,13 @@ export default createStore({
 ```ts
 import App from "./App.vue";
 import router from "./router";
-import store from './store';
+import store, { globalStoreKey } from "./store";
 
 // App配置/挂载相关
 // 1. 创建App
 const app = createApp(App);
 // 2. 注入
-app.use(router).use(store).use(vant);
+app.use(router).use(store, globalStoreKey).use(vant);
 // 3. 挂载
 app.mount("#app");
 ```
