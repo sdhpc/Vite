@@ -978,8 +978,38 @@ ReactDOM.render(
 
 ```
 
+## 2. [Antd-mobile >>](https://mobile.ant.design/zh)
+
+目前使用的  <u>Antd-mobile v5（白杨）</u> 版本。
+
+**① 安装依赖**
+
+```shell
+$ yarn add antd-mobile@next
+```
+
+> 在 beta 阶段我们有可能会在后续的新版本中发布 break change，所以强烈建议使用 lockfile 锁定版本或手动锁定版本
+
+**② 引入**
+
+直接引入组件即可，antd-mobile 会自动为你加载 css 样式文件：
+
+```tsx
+import { Button } from 'antd-mobile'
+```
+
+
+
 # 七、模板地址
 
-- [vue-template >>](https://github.com/LiHongyao/vite-vue-template__MP)
-- [react-template >>](https://github.com/LiHongyao/vite-react-template__MP)
+## 1. vue
+
+- [公众号模板 >>](https://github.com/LiHongyao/vite-vue-template__MP)
+- [H5模板 >>]()
+
+## 2. React
+
+- [公众号模板 >>](https://github.com/LiHongyao/vite-react-template__MP)
+
+- [H5模板 >>]()
 
