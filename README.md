@@ -998,7 +998,28 @@ $ yarn add antd-mobile@next
 import { Button } from 'antd-mobile'
 ```
 
+## 3. 二级目录部署
 
+**①. 在 `package.json` 文件中配置指令时时设置 `--base=/二级目录名/`**。
+
+**②. 在各环境配置文件中根据需要设置 `VITE_APP_BASE` 字段值**。
+
+**②. 在配置路由时设置 `basename` 属性，如下所示：**
+
+```tsx
+/**
+ * src/router/index.tsx
+ * appRouter
+ * @returns
+ */
+export const AppRouter: React.FC = ({ children }) => {
+  return (
+    <Suspense fallback={Fallback}>
+      <Router basename={import.meta.env.VITE_APP_BASE}>{children}</Router>
+    </Suspense>
+  );
+};
+```
 
 # 七、模板地址
 
