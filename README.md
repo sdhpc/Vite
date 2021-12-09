@@ -1023,14 +1023,7 @@ export const AppRouter: React.FC = ({ children }) => {
 
 # 七、模板地址
 
-## 1. vue
+- vue：https://github.com/LiHongyao/vite-vue-template
 
-- [公众号模板 >>](https://github.com/LiHongyao/vite-vue-template__MP)
-- [H5模板 >>]()
-
-## 2. React
-
-- [公众号模板 >>](https://github.com/LiHongyao/vite-react-template__MP)
-
-- [H5模板 >>]()
+- react：https://github.com/LiHongyao/vite-react-template
 
