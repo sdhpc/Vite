@@ -1,16 +1,24 @@
-官网地址：https://cn.vitejs.dev/
+# 契子
+
+本文主要简单介绍一下 `Vite` 相关的知识点并结合实际应用时的一些总结，本文会不定期更新优化收集在使用 Vite 过程中要的一些问题和配置。
 
 # 一、前言
 
+[Vite 下一代前端开发与构建工具 >>](https://cn.vitejs.dev/)
+
 Vite  是一种新型前端构建工具，能够显著提升前端开发体验。它主要由两部分组成：
 
-- 一个开发服务器，基于原生ES模块提供了丰富的内建功能，如模块热更新（HMR）；
-- 一套构建指令，使用 Rollup 打包你的代码，并且它是预配置的，可以输出用于生产环境的优化过的静态资源。
+- 一个开发服务器，基于原生 `ES模块` 提供了丰富的内建功能，如模块热更新（`HMR`）；
+- 一套构建指令，使用 `Rollup` 打包你的代码，并且它是预配置的，可以输出用于生产环境的优化过的静态资源。
 
 **其特点就是：**
 
-- 启动快
-- 更新快
+- 极速的服务启动：使用原生 `ESM` 文件，无需打包!
+- 轻量快速的热重载：无论应用程序大小如何，都始终极快的模块热重载（`HMR`）
+- 丰富的功能：对 `TypeScript`、`JSX`、`CSS` 等支持开箱即用。
+- 优化的构建：可选 “多页应用” 或 “库” 模式的预配置 `Rollup` 构建
+- 通用的插件：在开发和构建之间共享 `Rollup-superset` 插件接口。
+- 完全类型化的API：灵活的 API 和完整 TypeScript 类型。
 
 **浏览器支持：**
 
@@ -36,7 +44,7 @@ $ yarn create @vitejs/app react-ts-proj --template react-ts
 
 # 三、Vite 配置项
 
-Vite配置为放置在根目录中的 *vite.config.js* 文件。
+Vite 配置文件为放置在根目录中的 `vite.config.js` 文件。
 
 ## 1. 取别名
 
@@ -132,9 +140,15 @@ VITE_APP_APPID_WEIXIN=微信appID
 VITE_APP_APPID_ALIPAY=支付宝appID
 ```
 
+> Tips：
+>
+> 1）环境变量名必须以 `VITE_APP` 开头；
+>
+> 2）配置文件的内容请根据项目需要设置；
+
 **②. 修改 <u>package.json</u> 指令**
 
-> Vue 配置示例：
+> **Vue 配置示例**
 
 ```json
 "dev": "vite --mode dev --host 0.0.0.0",
@@ -142,7 +156,7 @@ VITE_APP_APPID_ALIPAY=支付宝appID
 "build": "vue-tsc --noEmit && vite build --mode production",
 ```
 
-> React 配置示例：
+> **React 配置示例**
 
 ```
 "dev": "vite --mode=dev --host=0.0.0.0",
@@ -152,7 +166,7 @@ VITE_APP_APPID_ALIPAY=支付宝appID
 
 **③. 配置环境变量智能提示**
 
-> Vue 配置示例：
+> **差异化配置**
 
 根目录新建 **env.d.ts** 文件，键入以下内容：
 
@@ -165,7 +179,7 @@ interface ImportMetaEnv {
 }
 ```
 
-> React 配置示例：
+> **React 配置示例**
 
 在 **vite-env.d.ts** 文件中，键入以下内容：
 
@@ -186,13 +200,11 @@ interface ImportMetaEnv {
 import.meta.env.VITE_APP_HOST
 ```
 
-
-
 # 四、项目配置
 
 ## 1. 预处理样式
 
-直接安装 less/sass 即可使用，无需任何配置。
+直接安装 `less/sass` 即可使用，无需任何配置。
 
 ```shell
 $ yarn add less -D
@@ -246,7 +258,6 @@ function setRem() {
 setRem();
 // 改变窗口大小时重新设置 rem
 window.onresize = function () {
-  console.log("我执行了");
   setRem();
 };
 ```
@@ -531,11 +542,11 @@ export default {
 };
 ```
 
+#　五、差异化配置
 
+## 1. vue
 
-#　五、Vue - 差异化配置
-
-## 1. 配置路由
+### - 配置路由
 
 安装依赖：
 
@@ -602,7 +613,7 @@ app.use(router);
 app.mount("#app");
 ```
 
-## 2. 状态管理
+### - 状态管理
 
 安装依赖：
 
@@ -670,7 +681,7 @@ app.use(router).use(store, globalStoreKey).use(vant);
 app.mount("#app");
 ```
 
-## 3. Vant3
+### - Vant3
 
 安装依赖：
 
@@ -698,7 +709,7 @@ app.use(router).use(store).use(vant);
 app.mount("#app");
 ```
 
-## 4. 二级目录部署
+### - 二级目录部署
 
 **方案1：**
 
@@ -736,9 +747,9 @@ const router = createRouter({
 });
 ```
 
-# 六、React - 差异化配置
+## 2. React
 
-## 1. 路由配置
+### - 路由配置
 
 **①. 说明**
 
@@ -978,7 +989,7 @@ ReactDOM.render(
 
 ```
 
-## 2. [Antd-mobile >>](https://mobile.ant.design/zh)
+### - [Antd-mobile >>](https://mobile.ant.design/zh)
 
 目前使用的  <u>Antd-mobile v5（白杨）</u> 版本。
 
@@ -998,7 +1009,7 @@ $ yarn add antd-mobile@next
 import { Button } from 'antd-mobile'
 ```
 
-## 3. 二级目录部署
+### - 二级目录部署
 
 **①. 在 `package.json` 文件中配置指令时时设置 `--base=/二级目录名/`**。
 
@@ -1021,9 +1032,11 @@ export const AppRouter: React.FC = ({ children }) => {
 };
 ```
 
-# 七、模板地址
+# 六、模板地址
 
-- vue：https://github.com/LiHongyao/vite-vue-template
+闲暇之余，结合 Vite 封装了两个模板，大家可以参考：
 
-- react：https://github.com/LiHongyao/vite-react-template
+- [Vite2 + Vue3 + TypeScript + Vant Mobile >>](https://github.com/LiHongyao/vite-vue-template)
+
+- [Vite2 + React +_TypeScript + Ant Design Mobile 5.x >>](https://github.com/LiHongyao/vite-react-template)
 
