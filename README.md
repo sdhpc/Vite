@@ -1,6 +1,6 @@
 # 契子
 
-本文主要简单介绍一下 `Vite` 相关的知识点并结合实际应用时的一些总结，本文会不定期更新优化收集在使用 Vite 过程中要的一些问题和配置。
+本文主要简单介绍一下 `Vite` 相关的知识点及使用，本文会不定期更新优化收集在使用 Vite 过程中遇到的一些问题和相关配置。
 
 # 一、前言
 
@@ -44,7 +44,7 @@ $ yarn create @vitejs/app react-ts-proj --template react-ts
 
 # 三、Vite 配置项
 
-Vite 配置文件为放置在根目录中的 `vite.config.js` 文件。
+配置文件：`vite.config.js`
 
 ## 1. 取别名
 
@@ -61,7 +61,7 @@ export default defineConfig({
 });
 ```
 
-> 提示：如果你使用 ts，那么你还需要在 **ts.config.json** 文件中添加如下配置：
+> 提示：如果你使用 ts，那么你还需要在 `ts.config.json` 文件中添加如下配置：
 
 ```json
 {
@@ -90,10 +90,10 @@ server: {
 
 ## 3. 环境变量
 
-**①. 在根目录新建  ”<u>.env.dev</u>“、”<u>.env.production</u>“、”<u>.env.test</u>“ 文件**
+**①. 在根目录新建  `.env.dev`、`.env.production`、`.env.test`**
 
 ```ini
-#　.env.dev --- 【开发环境】
+# 开发环境：.env.dev
 NODE_ENV=development
 VITE_APP_ENV=development
 
@@ -109,7 +109,7 @@ VITE_APP_APPID_ALIPAY=支付宝appID
 ```
 
 ```ini
-#　.env.production --- 【生产环境】
+# 生产环境：.env.production 
 NODE_ENV=production
 VITE_APP_ENV=production
 
@@ -125,7 +125,7 @@ VITE_APP_APPID_ALIPAY=支付宝appID
 ```
 
 ```ini
-#　.env.test --- 【测试环境】
+#　测试环境：.env.test
 NODE_ENV=production
 VITE_APP_ENV=production
 
@@ -146,9 +146,9 @@ VITE_APP_APPID_ALIPAY=支付宝appID
 >
 > 2）配置文件的内容请根据项目需要设置；
 
-**②. 修改 <u>package.json</u> 指令**
+**②. 修改 `package.json` 指令**
 
-> **Vue 配置示例**
+> **@Vue **
 
 ```json
 "dev": "vite --mode dev --host 0.0.0.0",
@@ -156,7 +156,7 @@ VITE_APP_APPID_ALIPAY=支付宝appID
 "build": "vue-tsc --noEmit && vite build --mode production",
 ```
 
-> **React 配置示例**
+> **@React**
 
 ```
 "dev": "vite --mode=dev --host=0.0.0.0",
@@ -166,9 +166,9 @@ VITE_APP_APPID_ALIPAY=支付宝appID
 
 **③. 配置环境变量智能提示**
 
-> **差异化配置**
+> **@Vue**
 
-根目录新建 **env.d.ts** 文件，键入以下内容：
+根目录新建 `env.d.ts` 文件，键入以下内容：
 
 ```tsx
 interface ImportMetaEnv {
@@ -179,9 +179,9 @@ interface ImportMetaEnv {
 }
 ```
 
-> **React 配置示例**
+> **@React**
 
-在 **vite-env.d.ts** 文件中，键入以下内容：
+在 `vite-env.d.ts` 文件中，键入以下内容：
 
 ```tsx
 /// <reference types="vite/client" />
@@ -219,7 +219,7 @@ $ yarn add sass -D
 $ yarn add postcss-pxtorem autoprefixer -D
 ```
 
-在根目录下创建 **postcss.config.js**  文件：
+在根目录下创建 `postcss.config.js`  文件：
 
 ```js
 module.exports = {
@@ -242,7 +242,7 @@ module.exports = {
 };
 ```
 
-在根目录src中新建utils目录下新建rem.ts等比适配文件
+新建 `src/utils/rem.ts` 文件：
 
 ```ts
 // rem等比适配配置文件
@@ -262,19 +262,18 @@ window.onresize = function () {
 };
 ```
 
-在 **mian.ts(x)**  引入
+在 `mian.ts(x)`  引入
 
 ```ts
 import "./utils/rem"
 ```
 
-> 提示：
+> 提示：如果提示 “无法在 "`--isolatedModules`" 下编译“`rem.ts`”，因为它被视为全局脚本文件。请添加导入、导出或空的 "`export {}`" 语句来使它成为模块 ”此时你应该在 `tsconfig.json` 文件中将 `isolatedModules` 字段设置为 `false`。
 >
-> - ts 提示 **无法在 "--isolatedModules" 下编译“rem.ts”，因为它被视为全局脚本文件。请添加导入、导出或空的 "export {}" 语句来使它成为模块**，此时你应该在 **tsconfig.json** 文件中将 **isolatedModules** 字段设置为 `false`。
 
 ## 3. 全局TS类型声明
 
-在根目录创建 **typings/index.d.ts** 文件
+在根目录创建 `typings/index.d.ts` 文件
 
 ```ts
 export {};
@@ -546,7 +545,7 @@ export default {
 
 ## 1. vue
 
-### - 配置路由
+### - 路由配置
 
 安装依赖：
 
@@ -751,146 +750,96 @@ const router = createRouter({
 
 ### - 路由配置
 
-**①. 说明**
-
-本文以微信公众号/支付宝生活号开发路由配置举例。
-
-**②. 目录结构**
-
-这里只列举路由配置相关所包括的目录，仅供参考：
+**①. 目录结构**
 
 ```ini
 .
 ├── components
-	├── Fallback # 懒加载loading提示 
-	├── NotEnv   # 非微信/支付宝环境提示
-	└── TabBar   # 标签栏
-		├── index.tsx
-		└── index.less
+│   ├── Fallback # 懒加载loading提示 
+│   ├── NotEnv   # 非微信/支付宝环境提示
+│	  └── TabBar   # 标签栏
+│   │   ├── index.tsx
+│   │   └── index.less
+├── layouts
+│	  └── index.tsx
 ├── pages
-	├── Auth
-	├── IndexPage
-	├── Integral
-	├── Mine
-	├── NotFound
-	└── PrivilegeBrand
+│   ├── Auth
+│   ├── IndexPage
+│   ├── Integral
+│   ├── Mine
+│   ├── NotFound
+│	  └── PrivilegeBrand
 ├── router
-	├── index.tsx
-	└── routes.ts
+│   ├── index.tsx
+│	  └── routes.ts
 └── main.tsx
 ```
 
-**③. 安装依赖**
+> 提示：这里只例举部分目录，仅供参考。
+
+**②. 安装依赖**
 
 ```shell
-$ yarn add react-router-dom react-router-guards
+$ yarn add react-router-dom
 ```
 
-依赖包解读：
+> 提示：目前我使用的版本是 `^6.0.2`，关于 v6 版本的路由使用请 [参考这里 >>](https://reactrouter.com/)
 
-- **react-router-guards**：导航守卫；
-- **react-router-dom**：Web路由核心；
+**③. 文件代码**
 
-**④. 文件代码**
-
-> src/router/routes.ts
-
-```typescript
-import React from "react";
-// 引入页面
-import Auth from "@/pages/Auth";
-import IndexPage from "@/pages/IndexPage";
-import Integral from "@/pages/Integral";
-import Mine from "@/pages/Mine";
-import NotFound from "@/pages/NotFound";
-import PrivilegeBrand from "@/pages/PrivilegeBrand";
-// 引入路由类型
-import { GuardedRouteProps } from "react-router-guards";
-
-/**
- * - 如果是tab页或者授权页，为了避免跳转时闪屏，故而不采取【懒加载】路由模式；
- */
-
-const routes: GuardedRouteProps[] = [
-  {
-    path: "/auth/:type",
-    component: Auth,
-    meta: {
-      title: "授权",
-    },
-  },
-  {
-    path: "/index",
-    component: IndexPage,
-    meta: {
-      title: "首页",
-      isShowTabBar: true,
-    },
-  },
-  {
-    path: "/integral",
-    component: Integral,
-    meta: {
-      title: "攒积分",
-      isShowTabBar: true,
-    },
-  },
-  {
-    path: "/privilege-brand",
-    component: PrivilegeBrand,
-    meta: {
-      title: "权益",
-      isShowTabBar: true,
-    },
-  },
-  {
-    path: "/mine",
-    component: Mine,
-    meta: {
-      title: "我的",
-      isShowTabBar: true,
-    },
-  },
-  // NotFount 组件需放置在路由表最后
-  {
-    path: "",
-    component: NotFound,
-    meta: {
-      title: "NOT FOUND",
-    },
-  },
-];
-
-export default routes;
-```
-
-> src/router/index.tsx
+> `src/layout/index.tsx`
 
 ```tsx
-import React, { Suspense, useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-import { GuardProvider, GuardedRoute } from "react-router-guards";
-import {
-  GuardFunctionRouteProps,
-  GuardToRoute,
-  Next,
-} from "react-router-guards/dist/types";
-import Fallback from "@/components/Fallback";
-import Tools from "lg-tools";
-import NotEnv from "@/components/NotEnv";
-import TabBar from "@/components/TabBar";
-import routes from "./routes";
+import TabBar from '@/components/@lgs-react/TabBar';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+
+const Layout: React.FC = () => {
+  return (
+    <>
+      {/* 视图容器，类似于vue中的 router-view */}
+      <Outlet />
+      {/* 标签栏 */}
+      <TabBar />
+    </>
+  );
+};
+
+export default Layout;
+```
+
+> `src/App.tsx`
+
+```tsx
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import Fallback from '@/components/@lgs-react/Fallback';
+import Layout from '@/layout';
+import IndexPage from '@/pages/IndexPage';
+import Integral from '@/pages/Integral';
+import Mine from '@/pages/Mine';
+import PrivilegeBrand from '@/pages/PrivilegeBrand';
+import Auth from '@/pages/Auth';
+import NotFound from './pages/NotFound';
+import NotEnv from './components/@lgs-react/NotEnv';
+
+import Tools from 'lg-tools';
+
+const Details = React.lazy(() => import('@/pages/Details'));
+const Download = React.lazy(() => import('@/pages/Download'));
+const Test = React.lazy(() => import('@/pages/Test'));
 
 /**
  * 环境判断
- * - 如果是微信/支付宝环境则渲染子组件
- * - 否则渲染提示组件（提示内容：请在微信或支付宝环境客户端打开链接）
- * - lg-tools：https://www.npmjs.com/package/lg-tools
+ * 如果 VITE_APP_SOURCE === 'mp'，即表示公众号/生活号
+ * 那么在浏览器环境将提示 “请在微信或支付宝客户端打开链接”
  * @param param0
  * @returns
  */
 export const GuardEnv: React.FC = ({ children }) => {
-  return ["alipay", "weixin"].indexOf(Tools.getEnv()) === -1 ? (
+  return import.meta.env.VITE_APP_SOURCE === 'mp' &&
+    ['weixin', 'alipay'].indexOf(Tools.getEnv()) === -1 ? (
     <NotEnv />
   ) : (
     <>{children}</>
@@ -904,37 +853,8 @@ export const GuardEnv: React.FC = ({ children }) => {
 export const AppRouter: React.FC = ({ children }) => {
   return (
     <Suspense fallback={Fallback}>
-      <Router>{children}</Router>
+      <Router basename={import.meta.env.VITE_APP_BASE}>{children}</Router>
     </Suspense>
-  );
-};
-
-/**
- * appGuard - 导航守卫
- * @param param0
- * @returns
- */
-export const AppGuard: React.FC = ({ children }) => {
-  const [showTabBar, setShowTabBar] = useState(false);
-  // 守卫函数
-  const guardFn = (
-    to: GuardToRoute,
-    from: GuardFunctionRouteProps | null,
-    next: Next
-  ) => {
-    // 导航守卫 -- 可以做一些类似于修改标题/权限等事情
-    // 设置标题
-    document.title = to.meta.title;
-    // 设置是否显示tabbar
-    setShowTabBar(!!to.meta.isShowTabBar);
-    next();
-  };
-  return (
-    <>
-      <GuardProvider guards={[guardFn]}>{children}</GuardProvider>
-      {/* 根据路由表上的 “meta.isShowTabBar” 属性判断是否显示tabBar组件 */}
-      {showTabBar ? <TabBar /> : null}
-    </>
   );
 };
 
@@ -944,52 +864,57 @@ export const AppGuard: React.FC = ({ children }) => {
  */
 export const AppRoutes: React.FC = () => {
   return (
-    <Switch>
-      {routes.map((route, i) => {
-        return (
-          <GuardedRoute
-            path={route.path}
-            key={i}
-            exact
-            component={route.component}
-            meta={route.meta}
-          />
-        );
-      })}
-    </Switch>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<IndexPage />} />
+        <Route path='privilege-brand' element={<PrivilegeBrand />} />
+        <Route path='integral' element={<Integral />} />
+        <Route path='mine' element={<Mine />} />
+      </Route>
+      <Route path='/details' element={<Details />} />
+      <Route path='/download' element={<Download />} />
+      <Route path='/test' element={<Test />} />
+      <Route path='/auth/:type' element={<Auth />} />
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
 };
 ```
 
-> src/main.tsx
+> `src/main.tsx`
 
 ```tsx
-import React from "react";
-import ReactDOM from "react-dom";
-import ErrorBoundary from "@/components/@lgs-react/ErrorBoundary";
-import { AppRouter, AppRoutes, AppGuard, GuardEnv } from "./router";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ErrorBoundary from '@/components/@lgs-react/ErrorBoundary';
 
-import "@/utils/rem";
-import "@/index.less";
+import '@/utils/rem';
+import '@/index.css';
+import { AppRouter, AppRoutes, GuardEnv } from './App';
+import Schemes from 'lg-schemes';
 
+// 1. 开发环境 & 测试环境 启用vconsole --- Tips：目前启用vconsole打包会出现异常
+import vconsole from 'vconsole';
+if (import.meta.env.VITE_APP_ENV !== 'pro') {
+  new vconsole();
+}
+
+// 2. 渲染视图
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary>
       <GuardEnv>
         <AppRouter>
-          <AppGuard>
-            <AppRoutes />
-          </AppGuard>
+          <AppRoutes />
         </AppRouter>
       </GuardEnv>
     </ErrorBoundary>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
-
 ```
 
-### - [Antd-mobile >>](https://mobile.ant.design/zh)
+### - [Antd-mobile](https://mobile.ant.design/zh)
 
 目前使用的  <u>Antd-mobile v5（白杨）</u> 版本。
 
@@ -1034,9 +959,10 @@ export const AppRouter: React.FC = ({ children }) => {
 
 # 六、模板地址
 
-闲暇之余，结合 Vite 封装了两个模板，大家可以参考：
+闲暇之余，结合 `Vite` 封装了两个模板，大家可以参考：
 
 - [Vite2 + Vue3 + TypeScript + Vant Mobile >>](https://github.com/LiHongyao/vite-vue-template)
 
 - [Vite2 + React +_TypeScript + Ant Design Mobile 5.x >>](https://github.com/LiHongyao/vite-react-template)
 
+> 提示：本文中的代码片段均摘自上述模板文件。
