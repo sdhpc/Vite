@@ -27,19 +27,20 @@ Vite  是一种新型前端构建工具，能够显著提升前端开发体验�
 
 # 二、搭建项目
 
+`node`：v16.13.1
+
+`npm`：8.1.2
+
 [参考这里 >>](https://cn.vitejs.dev/guide/#scaffolding-your-first-vite-project)
 
 ```shell
-$ yarn create @vitejs/app
+$ npm init vite@latest
 ```
 
 快速创建项目指令：
 
 ```shell
-# vue + ts
-$ yarn create @vitejs/app vue-ts-proj --template vue-ts
-# react + ts
-$ yarn create @vitejs/app react-ts-proj --template react-ts
+$ npm init vite@latest <PROJECT-Name> -- --template vue-ts
 ```
 
 # 三、Vite 配置项
