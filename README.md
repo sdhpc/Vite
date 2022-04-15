@@ -41,6 +41,7 @@ $ npm init vite@latest
 
 ```shell
 $ npm init vite@latest <PROJECT-Name> -- --template vue-ts
+$ npm init vite@latest <PROJECT-Name> -- --template react-ts
 ```
 
 # 三、Vite 配置项
@@ -542,7 +543,7 @@ export default {
 };
 ```
 
-#　五、差异化配置
+# 五、差异化配置
 
 ## 1. vue
 
